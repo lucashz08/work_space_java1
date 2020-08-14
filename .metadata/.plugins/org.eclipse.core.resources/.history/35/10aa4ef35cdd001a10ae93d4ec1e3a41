@@ -1,0 +1,42 @@
+package com.group.utils;
+
+public class Utils {
+
+	/**
+	 * @author Lucas Lopes
+	 * @apiNote Verifica se uma String pode ser convertida em Double
+	 * @param str
+	 * @return caso possivel retorna true, se não retorna false
+	 */
+
+	public static boolean isDouble(String str) {
+		try {
+			Double.parseDouble(str);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * @author Lucas Lopes
+	 * @apiNote Verifica se uma String pode ser um cpf caso tenha 11 digitos e
+	 *          apenas numeros
+	 * @param cpf
+	 * 
+	 * @return sim : true, não : false
+	 */
+	public static boolean verificarCPF(String cpf) {
+
+		if (cpf.length() != 11) {
+			return false;
+		}
+
+		if (!cpf.matches("^[0-9]*$")) {
+
+			return false;
+		}
+
+		return true;
+	}
+}

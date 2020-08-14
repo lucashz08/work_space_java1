@@ -1,0 +1,36 @@
+package com.group.main;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import com.group.classes.Pessoa;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		try (Scanner sc = new Scanner(System.in)) {
+			
+			System.out.print("Digite o nome do arquivos de entra mais a extensão : ");
+
+			String fileName = sc.nextLine();
+
+			if (fileName.isEmpty())
+				fileName = "entrada.csv";
+
+			String path = new File(fileName).getAbsolutePath();
+			
+			List<Pessoa> pessoas = new ArrayList<>();		
+			pessoas = Pessoa.getListByFile(path);
+			
+			for (Pessoa pessoa : pessoas) {
+				System.out.println(pessoa);
+			}
+	
+		}catch(Exception e){
+			
+		}
+	}
+}

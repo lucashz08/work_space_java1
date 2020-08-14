@@ -1,0 +1,51 @@
+package com.group.classes;
+
+import java.time.LocalDate;
+
+import com.group.exceptions.DependenteException;
+
+public abstract class Pessoa {
+	
+	private String nome;
+	private String cpf;
+	private LocalDate dataNascimento;
+	
+	public Pessoa(String nome, String cpf, LocalDate dataNascimento) {
+		super();
+		this.nome = nome;
+		this.cpf = cpf;
+		this.dataNascimento = dataNascimento;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	@Override
+	public String toString() {
+		return "Pessoa [nome=" + nome + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + "]";
+	}
+	
+	public abstract void addDependete(Dependente dep) throws DependenteException;
+	
+	public abstract void addDependete(String nome, String cpf, LocalDate dataNascimento, String parente) throws DependenteException;
+	
+	
+	public static Funcionario funcionarioOuDepentente(String nome, String cpf, LocalDate dataNascimento, double salarioBruto)
+	{	
+		return new Funcionario(nome, cpf, dataNascimento, salarioBruto);
+	}
+	
+	public static Dependente funcionarioOuDepentente(String nome, String cpf, LocalDate dataNascimento, String parente)
+	{		
+		return new Dependente( nome, cpf, dataNascimento, parente);
+	}
+}

@@ -1,0 +1,29 @@
+package com.main;
+
+import java.sql.Connection;
+
+import com.classes.Carros;
+import com.model.ConnectionFactory;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		Connection conn = ConnectionFactory.getConnection();
+		
+		System.out.println(conn);
+		
+		Carros car = new Carros();
+		
+		car.setId(2);
+//		car.setMarca("chev");
+//		car.setModelo("Celta");
+//		car.inserirCarro();
+		
+		car.setModelo("Gol");
+		car.updateCarro();
+		
+
+	}
+
+}

@@ -1,0 +1,29 @@
+package main;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Arqui {
+
+	public static void main(String[] args) {
+		
+		try(BufferedReader br = new BufferedReader(new FileReader("texto.txt"))){
+			
+			String linha = br.readLine();
+			
+			while(linha != null)
+			{
+				System.out.println(linha);
+				
+				linha = br.readLine();
+			}
+			
+		}catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+
+	}
+
+}

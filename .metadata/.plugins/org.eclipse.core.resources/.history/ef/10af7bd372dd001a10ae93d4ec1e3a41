@@ -1,0 +1,27 @@
+package com.model;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class ConnectionFactory {
+
+	public static Connection getConnection() {
+		String url = "jdbc:mysql://201.46.39.78:3306/carros";
+		
+		Connection conn = null;
+		
+		try{
+			conn = DriverManager.getConnection(url, "developer", "1234");
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if(conn == null)
+			System.out.println("Falha na conexão!");
+		
+		return conn;
+	}
+
+}

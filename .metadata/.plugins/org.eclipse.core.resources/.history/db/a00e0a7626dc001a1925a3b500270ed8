@@ -1,0 +1,51 @@
+package com.group.classes;
+
+public class CalcularImposto {
+
+	public void calcularDescontoInss(Funcionario fc) {
+
+		if (fc.getSalarioBruto() <= 1751.81) {
+			
+			fc.setDescontoInss(fc.getSalarioBruto() * 0.08);
+			
+		} else if (fc.getSalarioBruto() <= 2919.72) {
+			
+			fc.setDescontoInss(fc.getSalarioBruto() * 0.09);
+			
+		} else if (fc.getSalarioBruto() <= 5839.45) {
+			
+			fc.setDescontoInss(fc.getSalarioBruto() * 0.11);
+			
+		} else {
+			fc.setDescontoInss(5829.45 * 0.11);
+		}
+
+	}
+
+	public void calcularValorDependente(Funcionario fc) {
+		fc.setValorDependentes( 1/*numero de dependentes*/ * 189.59);
+	}
+
+	public void calcularSalarioLiquido(Funcionario fc) {
+		if (fc.getSalarioBruto() <= 1903.98) {
+			fc.setSalarioLiquido(fc.getSalarioBruto() - fc.getDescontoInss());
+		} else {
+			fc.setSalarioLiquido(fc.getSalarioBruto() - fc.getValorDependentes() - fc.getDescontoInss());
+		}
+	}
+
+	public void calcularImpostoRenda(Funcionario fc) {
+		if (salarioLiquido <= 1903.98) {
+			impostoRenda = 0;
+		} else if (salarioLiquido <= 2826.65) {
+			impostoRenda = (salarioLiquido * 0.075) - 142.80;
+		} else if (salarioLiquido <= 3751.05) {
+			impostoRenda = (salarioLiquido * 0.15) - 354.80;
+		} else if (salarioLiquido <= 4664.68) {
+			impostoRenda = (salarioLiquido * 0.225) - 636.13;
+		} else {
+			impostoRenda = (salarioLiquido * 0.275) - 869.36;
+		}
+	}
+
+}

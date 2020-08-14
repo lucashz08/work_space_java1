@@ -1,0 +1,51 @@
+package com.group.classes;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.group.exceptions.DependenteException;
+
+public class Funcionario extends Pessoa{
+
+	private double salarioBruto;
+	private double descontoInss;
+	private double descontoIR;
+	private List<Dependente> listaDependente = new ArrayList<Dependente>();
+	
+	public Funcionario(String nome, String cpf, LocalDate dataNascimento, double salarioBruto, double descontoInss, double descontoIR) {
+		
+		super(nome, cpf, dataNascimento);
+		
+		this.salarioBruto = salarioBruto;
+		this.descontoInss = descontoInss;
+		this.descontoIR = descontoIR;
+		
+	}
+	
+	public void addDependete(String nome, String cpf, LocalDate dataNascimento, int parente) throws DependenteException{
+		
+		for (Dependente dep : listaDependente) {
+			
+			if(dep.getCpf() == cpf)
+			{
+				 throw new DependenteException("CPF já existe na lista"); 
+			}
+		}
+		
+		listaDependente.add(new Dependente(nome, cpf, dataNascimento, parente)); 
+	}
+
+	public double getSalarioBruto() {
+		return salarioBruto;
+	}
+
+	public double getDescontoInss() {
+		return descontoInss;
+	}
+
+	public double getDescontoIR() {
+		return descontoIR;
+	}
+	
+}

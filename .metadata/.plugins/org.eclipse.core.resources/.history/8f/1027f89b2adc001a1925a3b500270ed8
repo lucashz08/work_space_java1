@@ -1,0 +1,7 @@
+package com.group.interfaces;
+
+public interface Impostos {
+	
+	void gerarExtratoImposto(String nome, String cpf, String inss, String ir, double salario);
+
+}

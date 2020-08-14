@@ -1,0 +1,5 @@
+package com.group.classes;
+
+public abstract class Pessoa {
+
+}

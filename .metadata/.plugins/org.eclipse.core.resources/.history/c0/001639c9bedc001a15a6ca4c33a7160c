@@ -1,0 +1,18 @@
+package persistence;
+
+import java.sql.Connection;
+
+import model.ConnectionFactory;
+
+public class contaDao {
+	
+	Connection conn;
+	
+	public contaDao ()
+	{
+		this.conn = new ConnectionFactory().getConnection();
+	}
+	
+	
+
+}

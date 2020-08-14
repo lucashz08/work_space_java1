@@ -1,0 +1,28 @@
+package com.group.utils;
+
+import java.time.LocalDate;
+
+import com.group.classes.Dependente;
+import com.group.classes.Funcionario;
+
+public class Utils {
+
+	public static boolean isDouble(String str){
+		try{
+			Double.parseDouble(str);
+		}catch(Exception e){
+			return false;
+		}
+		return true; 
+	}
+	
+	public static Funcionario funcionarioOuDepentente(String nome, String cpf, LocalDate dataNascimento, double salarioBruto)
+	{	
+		return new Funcionario(nome, cpf, dataNascimento, salarioBruto);
+	}
+	
+	public static Dependente funcionarioOuDepentente(String nome, String cpf, LocalDate dataNascimento, String parente)
+	{		
+		return new Dependente( nome, cpf, dataNascimento, parente);
+	}
+}

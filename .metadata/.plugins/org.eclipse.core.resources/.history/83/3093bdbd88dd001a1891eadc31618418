@@ -1,0 +1,7 @@
+package com.interfaces;
+
+import com.classes.Carros;
+
+public interface CarrosInter {
+	int inserirCarro(Carros car);
+}

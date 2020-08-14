@@ -1,0 +1,61 @@
+package com.classes;
+
+import com.dao.CarrosDao;
+import com.interfaces.Cars;
+
+public class Carros implements Cars{
+
+	private int id;
+	private String modelo;
+	private String marca;
+	
+	private CarrosDao car;
+
+	public Carros() {
+		super();
+	}
+
+	public Carros(int id, String moledo, String marca) {
+		super();
+		this.id = id;
+		this.modelo = moledo;
+		this.marca = marca;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+
+	public CarrosDao getCar() {
+		return car;
+	}
+
+	public void setCar(CarrosDao car) {
+		this.car = car;
+	}
+
+	@Override
+	public String toString() {
+		return "Carros [id=" + id + ", modelo=" + modelo + ", marca=" + marca + "]";
+	}
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+}

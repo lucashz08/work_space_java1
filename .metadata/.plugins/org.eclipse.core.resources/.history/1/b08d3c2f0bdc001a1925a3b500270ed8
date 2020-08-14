@@ -1,0 +1,5 @@
+package com.group.enums;
+
+public enum Pessoas {
+
+}

@@ -1,0 +1,30 @@
+package com.group.utils;
+
+import java.time.LocalDate;
+
+import com.group.classes.Dependente;
+import com.group.classes.Funcionario;
+
+public class Utils {
+
+	public boolean isDouble(String str){
+		try{
+			Double.parseDouble(str);
+		}catch(Exception e){
+			return false;
+		}
+		return true;
+	}
+	
+	public static Funcionario funcionarioOuDepentente(String nome, String cpf, LocalDate dataNascimento, String salarioBruto)
+	{
+		double salario = (double)Double.valueOf(salarioBruto); // tem uma coisinha errada ainda, to pensando
+		
+		return new Funcionario(nome, cpf, dataNascimento, salario);
+	}
+	
+	public static Dependente funcionarioOuDepentente(String nome, String cpf, LocalDate dataNascimento, int parente)
+	{
+		return new Dependente( nome, cpf, dataNascimento, parente);
+	}
+}

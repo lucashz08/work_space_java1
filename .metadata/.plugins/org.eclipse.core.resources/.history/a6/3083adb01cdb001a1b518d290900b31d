@@ -1,0 +1,14 @@
+import java.time.LocalDate;
+import java.time.Period;
+
+public class Teste {
+
+	public static void main(String[] args) {
+		
+		String da = "19930308";
+		String ano = da.substring(0, 3);
+		System.out.println(ano);
+
+	}
+
+}

@@ -1,0 +1,38 @@
+package com.group.classes;
+
+import java.time.LocalDate;
+
+import com.group.enums.Parentesco;
+
+public class Dependente extends Pessoa{
+	
+	private String parentesco;
+	
+	public Dependente(String nome, String cpf, LocalDate dataNascimento, int parente) {
+		super(nome, cpf, dataNascimento);
+		
+		if(Parentesco.FILHO.equals(parente)){
+			
+			this.parentesco = "FILHO";
+			
+		}else if(Parentesco.SOBRINHO.equals(parente)){
+			
+			this.parentesco = "SOBRINHO";
+			
+		}else {
+			this.parentesco = "OUTROS";
+		}
+	}
+
+	public String getParentesco() {
+		return parentesco;
+	}
+
+	@Override
+	public String toString() {
+		return "Dependente [parentesco=" + parentesco + " "+super.toString()+"]";
+	}
+
+	
+	
+}

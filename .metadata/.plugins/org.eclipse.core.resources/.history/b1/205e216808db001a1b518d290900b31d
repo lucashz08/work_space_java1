@@ -1,0 +1,33 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Biblioteca {
+	
+	private String responsavel;
+	List<Livros> livros = new ArrayList<Livros>();
+	
+	
+	public String getResponsavel() {
+		return responsavel;
+	}
+	
+	public List<Livros> getLivros() {
+		return livros;
+	}
+	
+	public void adicionar(String title, String autor, double preco) {
+		
+		livros.add(new Livros(title, autor, preco));
+		
+	}
+	
+	public void listar() {
+		
+		for(Livros li : livros)
+		{
+			System.out.println(li);
+		}
+	}
+	
+	
+}

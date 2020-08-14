@@ -1,0 +1,10 @@
+CREATE TABLE cliente(
+codigo int primary key auto_increment,
+nome varchar(255) not null,
+telefone varchar(255),
+email varchar(255) unique);
+
+ 
+
+
+insert into cliente values(null, 'Maria', '21934567654','maria@maria.com');

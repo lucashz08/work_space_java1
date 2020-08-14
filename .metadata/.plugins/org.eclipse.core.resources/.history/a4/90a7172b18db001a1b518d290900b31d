@@ -1,0 +1,16 @@
+import java.time.LocalDate;
+import java.time.Period;
+
+public class Teste {
+
+	public static void main(String[] args) {
+		
+		LocalDate data = LocalDate.now();
+		System.out.println(data);
+		
+		Period p = Period.between(LocalDate.parse("1993-03-08"), data);
+		System.out.println("Quantidade de dias : "+ p.getDays());
+
+	}
+
+}

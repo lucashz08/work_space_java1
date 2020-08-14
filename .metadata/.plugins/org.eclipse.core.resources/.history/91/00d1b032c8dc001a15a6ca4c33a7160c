@@ -1,0 +1,57 @@
+package com.group.main;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import com.group.classes.Funcionario;
+import com.group.classes.Pessoa;
+import com.group.enums.PessoaEnum;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		try (Scanner sc = new Scanner(System.in)) {
+
+			System.out.print("Digite o nome do arquivos de entra mais a extensão : ");
+
+			String fileName = sc.nextLine();
+
+			if (fileName.isEmpty())
+				fileName = "entrada.csv";
+
+			String path = new File(fileName).getAbsolutePath();
+
+			List<Pessoa> pessoas = new ArrayList<>();
+
+			int encontrado = Pessoa.funcionarioOrDepentendeRepeat(path);
+
+			if (encontrado != PessoaEnum.NOTHING.getValor()) {
+
+				System.out.println("CPF Invalido na linha : " + encontrado);
+
+			} else {
+
+				pessoas = Pessoa.getListByFile(path);
+
+				for (Pessoa pessoa : pessoas) {
+
+					((Funcionario) pessoa).gerarExtratoImposto();
+	
+					System.out.println("Nome: " + pessoa.getNome() + "\nSalario bruto: " + String.format("%.2f",((Funcionario) pessoa).getSalarioBruto())
+								+ "\nValor dependentes: "+((Funcionario) pessoa).getValorDependentes()+ "\nDesconto do Inss: " 
+								+  String.format("%.2f",((Funcionario) pessoa).getDescontoInss())
+								+ "\nDesconto do Imposto de Renda: " +  String.format("%.2f",((Funcionario) pessoa).getDescontoIR()) + "\nSalario liquido: "
+								+ String.format("%.2f",((Funcionario) pessoa).getSalarioLiquido()));
+					
+					System.out.println("\n====================================");
+				}
+			}
+
+		} catch (Exception e) {
+
+		}
+	}
+}

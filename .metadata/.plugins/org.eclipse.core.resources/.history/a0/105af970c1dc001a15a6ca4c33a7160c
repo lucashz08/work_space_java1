@@ -1,0 +1,16 @@
+package persistence;
+
+import java.sql.Connection;
+
+import model.ConnectionFactory;
+
+public class contaDao extends ContaDao{
+	
+	Connection conn;
+	
+	public contaDao ()
+	{
+		this.conn = new ConnectionFactory().getConnection();
+	}
+
+}

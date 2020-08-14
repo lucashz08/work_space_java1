@@ -1,0 +1,17 @@
+package com.main;
+
+import java.sql.Connection;
+
+import com.model.ConnectionFactory;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		Connection conn = ConnectionFactory.getConnection();
+		
+		System.out.println(conn);
+
+	}
+
+}

@@ -1,0 +1,120 @@
+package com.group.classes;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.group.exceptions.DependenteException;
+import com.group.interfaces.Impostos;
+
+public class Funcionario extends Pessoa implements Impostos {
+
+	private double salarioBruto;
+	private double descontoInss;
+	private double descontoIR; 
+	private double valorDependentes;
+	private double salarioLiquido;
+	
+	private List<Dependente> listaDependente = new ArrayList<Dependente>();
+
+	public Funcionario(String nome, String cpf, LocalDate dataNascimento, double salarioBruto) {
+
+		super(nome, cpf, dataNascimento);
+		this.salarioBruto = salarioBruto;
+
+	}
+
+	public void addDependete(Dependente dep) throws DependenteException {
+		try {
+			addDependete(dep.getNome(), dep.getCpf(), dep.getDataNascimento(), dep.getParentesco());
+		} catch (DependenteException e) {
+
+			throw new DependenteException("CPF já existe na lista");
+		}
+	}
+
+	public void addDependete(String nome, String cpf, LocalDate dataNascimento, String parente)
+			throws DependenteException {
+
+		for (Dependente dep : listaDependente) {
+
+			if (dep.getCpf() == cpf) {
+				throw new DependenteException("CPF já existe na lista");
+			}
+		}
+
+		listaDependente.add(new Dependente(nome, cpf, dataNascimento, parente));
+	}
+
+	public double getSalarioBruto() {
+		return salarioBruto;
+	}
+
+	public void setSalarioBruto(double salarioBruto) {
+		this.salarioBruto = salarioBruto;
+	}
+
+	public double getDescontoInss() {
+		return descontoInss;
+	}
+
+	public void setDescontoInss(double descontoInss) {
+		this.descontoInss = descontoInss;
+	}
+
+	public double getDescontoIR() {
+		return descontoIR;
+	}
+
+	public void setDescontoIR(double descontoIR) {
+		this.descontoIR = descontoIR;
+	}
+
+	public double getValorDependentes() {
+		return valorDependentes;
+	}
+
+	public void setValorDependentes(double valorDependentes) {
+		this.valorDependentes = valorDependentes;
+	}
+
+	public double getSalarioLiquido() {
+		return salarioLiquido;
+	}
+
+	public void setSalarioLiquido(double salarioLiquido) {
+		this.salarioLiquido = salarioLiquido;
+	}
+
+	public List<Dependente> getListaDependente() {
+		return listaDependente;
+	}
+
+	public void setListaDependente(List<Dependente> listaDependente) {
+		this.listaDependente = listaDependente;
+	}
+
+	@Override
+	public String toString() {
+		return "Funcionario [salarioBruto=" + salarioBruto + ", descontoInss=" + descontoInss + ", descontoIR="
+				+ descontoIR + ", listaDependente=" + listaDependente + " " + super.toString() + "]";
+	}
+
+	@Override
+	public void gerarExtratoImposto(String nome, String cpf, String inss, String ir, double salario) {
+
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter("saida.csv", true))) {
+
+			bw.append(this.getNome() + ";" + this.getCpf() + ";" + inss + ";" + ir + ";" + String.format("%.2f", salario));
+			bw.newLine();
+
+		} catch (IOException e) {
+			System.out.println("Error : " + e.getMessage());
+		}
+
+	}
+
+}

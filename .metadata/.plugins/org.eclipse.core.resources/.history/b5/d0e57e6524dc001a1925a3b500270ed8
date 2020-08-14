@@ -1,0 +1,50 @@
+package com.group.classes;
+
+public class CalcularImposto {
+	
+	//Inss acima de 5839.456
+	public void calcularDescontoInss(Funcionario fc) {
+		
+		
+		
+		if (fc.getfc.getSalarioBruto()() <= 1751.81) {
+			descontoInss = fc.getfc.getSalarioBruto()() * 0.08;
+		} else if (fc.getSalarioBruto() <= 2919.72) {
+			descontoInss = fc.getSalarioBruto() * 0.09;
+		} else if (fc.getSalarioBruto() <= 5839.45) {
+			descontoInss = fc.getSalarioBruto() * 0.11;
+		} else {
+			descontoInss = 5829.45 * 0.11;
+		}
+		
+	}
+	
+	public void calcularValorDependente(Funcionario fc) {
+		valorDependentes = dependentes*189.59;
+	}
+	
+	//Quando deve ser descontado o valorDependente? 
+	//SalarioLiquido est� dando diferente da tabela quando temos mais de um dependente.
+	public void calcularSalarioLiquido() {
+		if (fc.getSalarioBruto() <= 1903.98) {
+			salarioLiquido = fc.getSalarioBruto() - descontoInss;
+		} else {
+			salarioLiquido = fc.getSalarioBruto() - valorDependentes - descontoInss;
+		}
+	}
+	
+	public void calcularImpostoRenda(Funcionario fc) {
+		if (salarioLiquido <= 1903.98) {
+			impostoRenda = 0;
+		} else if (salarioLiquido <= 2826.65) {
+			impostoRenda = (salarioLiquido * 0.075) - 142.80;
+		} else if (salarioLiquido <= 3751.05) {
+			impostoRenda = (salarioLiquido * 0.15) - 354.80;
+		} else if (salarioLiquido <= 4664.68) {
+			impostoRenda = (salarioLiquido * 0.225) - 636.13;
+		} else {
+			impostoRenda = (salarioLiquido * 0.275) - 869.36;
+		}
+	}	
+
+}

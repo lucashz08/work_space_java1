@@ -1,0 +1,84 @@
+package com.group.main;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import com.group.classes.Pessoa;
+import com.group.utils.Utils;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		try (Scanner sc = new Scanner(System.in)) {
+			
+			System.out.print("Digite o nome do arquivos de entra mais a extensão : ");
+
+			String fileName = sc.nextLine();
+
+			if (fileName.isEmpty())
+				fileName = "entrada.csv";
+
+			String path = new File(fileName).getAbsolutePath();
+
+			try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+
+				List<Pessoa> pessoas = new ArrayList<Pessoa>();
+
+				String linha = br.readLine();
+
+				Pessoa people = null;
+
+				while (linha != null) {
+					if (!linha.isEmpty()) {
+						String[] vetor = null;
+
+						vetor = linha.split(";");
+
+						DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyyMMdd");
+						LocalDate dataNascimento = LocalDate.parse(vetor[2], formato);
+
+						if (Utils.isDouble(vetor[3])) {
+
+							double salario = (double) Double.valueOf(vetor[3]);
+							people = Pessoa.funcionarioOuDepentente(vetor[0], vetor[1], dataNascimento, salario);
+							pessoas.add(people);
+
+						} else {
+
+							people.addDependete(
+									Pessoa.funcionarioOuDepentente(vetor[0], vetor[1], dataNascimento, vetor[3]));
+
+						}
+
+					}
+
+					linha = br.readLine();
+
+				}
+
+				for (Pessoa pe : pessoas) {
+					System.out.println(pe);
+				}
+
+			} catch (NullPointerException a) {
+				a.printStackTrace();
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+
+			}
+	
+		}catch(Exception e){
+			
+		}
+	}
+}

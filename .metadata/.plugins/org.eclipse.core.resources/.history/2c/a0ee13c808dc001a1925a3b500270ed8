@@ -1,0 +1,167 @@
+package com.group.classes;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import com.group.exceptions.DependenteException;
+import com.group.utils.Utils;
+
+public abstract class Pessoa {
+	
+	private String nome;
+	private String cpf;
+	private LocalDate dataNascimento;
+	
+	public Pessoa(String nome, String cpf, LocalDate dataNascimento) {
+		super();
+		this.nome = nome;
+		this.cpf = cpf;
+		this.dataNascimento = dataNascimento;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	@Override
+	public String toString() {
+		return "Pessoa [nome=" + nome + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + "]";
+	}
+	
+	public abstract void addDependete(Dependente dep) throws DependenteException;
+	
+	public abstract void addDependete(String nome, String cpf, LocalDate dataNascimento, String parente) throws DependenteException;
+	
+	
+	public static Funcionario funcionarioOuDepentente(String nome, String cpf, LocalDate dataNascimento, double salarioBruto)
+	{	
+		return new Funcionario(nome, cpf, dataNascimento, salarioBruto);
+	}
+	
+	public static Dependente funcionarioOuDepentente(String nome, String cpf, LocalDate dataNascimento, String parente)
+	{		
+		return new Dependente( nome, cpf, dataNascimento, parente);
+	}
+	public static boolean funcionarioOrDepentendeRepeat(String path) {
+		
+		Set<String> lista = new HashSet<>();
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+			
+			String linha = br.readLine();
+			
+			while (linha != null) {
+				
+				if (!linha.isEmpty()) {
+				
+					String[] vetor = linha.split(";");
+					lista.add(vetor[1]);
+				}
+				
+				linha = br.readLine();
+			}
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	public static List<Pessoa> getListByFile(String path)
+	{
+		List<Pessoa> pessoas = new ArrayList<Pessoa>();
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+
+			String linha = br.readLine();
+
+			Pessoa people = null;
+
+			while (linha != null) {
+				if (!linha.isEmpty()) {
+					String[] vetor = null;
+
+					vetor = linha.split(";");
+
+					DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyyMMdd");
+					LocalDate dataNascimento = LocalDate.parse(vetor[2], formato);
+
+					if (Utils.isDouble(vetor[3])) {
+
+						double salario = (double) Double.valueOf(vetor[3]);
+						people = Pessoa.funcionarioOuDepentente(vetor[0], vetor[1], dataNascimento, salario);
+						pessoas.add(people);
+
+					} else {
+
+						people.addDependete(
+								Pessoa.funcionarioOuDepentente(vetor[0], vetor[1], dataNascimento, vetor[3]));
+
+					}
+
+				}
+
+				linha = br.readLine();
+
+			}
+			
+			return pessoas;
+			
+		} catch(FileNotFoundException e) {
+			System.out.println("Nome do arquivo não existe!");
+		} catch (NullPointerException a) {
+			a.printStackTrace();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		
+		return pessoas;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pessoa other = (Pessoa) obj;
+		if (cpf == null) {
+			if (other.cpf != null)
+				return false;
+		} else if (!cpf.equals(other.cpf))
+			return false;
+		return true;
+	}
+	
+	
+}

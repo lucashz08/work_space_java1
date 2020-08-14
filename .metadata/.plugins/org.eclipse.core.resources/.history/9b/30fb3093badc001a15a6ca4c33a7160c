@@ -1,0 +1,37 @@
+package com.main;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import model.ConnectionFactory;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// Connection connection = new ConnectionFactory().getConnection();
+
+		try (Connection connection = new ConnectionFactory().getConnection();
+				PreparedStatement ps = connection.prepareStatement("INSERT INTO cliente(nome, telefone, email) VALUES (?,?,?)");
+				Statement st = connection.createStatement();
+				ResultSet rs = st.executeQuery("SELECT * FROM cliente")) {
+
+			ps.setString(1, "Vivian");
+			ps.setString(2, "999999991");
+			ps.setString(3, "luviviane@gmail.com");
+
+			ps.execute();
+
+			while (rs.next()) {
+				System.out.printf("%s %s %s \n", rs.getString("nome"), rs.getString("telefone"), rs.getString("email"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;Mapping&apos; to &apos;Veiculos&apos;&#x0A;- Original project: &apos;Maps&apos;&#x0A;- Original element: &apos;Mapping&apos;&#x0A;- Renamed element: &apos;Veiculos&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Mapping&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{Mapping.java[Mapping" matchStrategy="1" name="Veiculos" qualified="false" references="true" similarDeclarations="false" stamp="1597066909793" textual="false" version="1.0"/>
+</session>

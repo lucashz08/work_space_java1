@@ -1,0 +1,42 @@
+public class Carros {
+
+	private int id;
+	private String moledo;
+	private String marca;
+
+	public Carros() {
+		super();
+	}
+
+	public Carros(int id, String moledo, String marca) {
+		super();
+		this.id = id;
+		this.moledo = moledo;
+		this.marca = marca;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getMoledo() {
+		return moledo;
+	}
+
+	public void setMoledo(String moledo) {
+		this.moledo = moledo;
+	}
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+}
